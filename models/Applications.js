@@ -47,4 +47,4 @@ InternshipID: {
   },
 });
 
-module.exports = mongoose.model("Book", bookSchema);
+module.exports = mongoose.model("Applications", ApplicationsSchema);
