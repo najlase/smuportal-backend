@@ -8,4 +8,4 @@ function InternshipService() {
     return {getInternships};
 }
 
-module.exports = userService;
+module.exports = InternshipService;
