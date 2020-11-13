@@ -48,4 +48,4 @@ const internshipSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Internships", IntershipsSchema);
+module.exports = mongoose.model("Internships", internshipSchema);
