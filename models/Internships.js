@@ -22,7 +22,7 @@ const internshipSchema = new mongoose.Schema({
     min: 2,
     max: 255
   },
-  Duration: {
+  Deadline: {
     type: Date,
     required: true,
     lowercase: true,
