@@ -8,6 +8,11 @@ const internshipSchema = new mongoose.Schema({
     min: 2,
     max: 255
   },
+  Star: {
+    type: Boolean,
+    required: true,
+    lowercase: true,
+  },
   Location: {
     type: String,
     required: true,
