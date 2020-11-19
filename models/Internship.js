@@ -10,7 +10,7 @@ const IntershipSchema = new mongoose.Schema({
   },
  Company: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Companies',
+    ref: 'Company',
     required: false,
     },
   Description: {
@@ -40,4 +40,4 @@ const IntershipSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Internships", IntershipSchema);
+module.exports = mongoose.model("Internship", IntershipSchema);
