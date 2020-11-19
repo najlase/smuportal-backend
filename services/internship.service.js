@@ -1,4 +1,4 @@
-const Internship = require("../models/Internships");
+const Internship = require("../models/Internship");
 const mongoose = require("mongoose");
 
 class InternshipService {
