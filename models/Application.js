@@ -2,11 +2,8 @@ const mongoose = require("mongoose");
 
 const ApplicationSchema = new mongoose.Schema({
 Files: {
-    type: file,
-    required: true,
-    lowercase: true,
-    min: 2,
-    max: 255
+    type: String,
+    data: Buffer
   },
 AppliedOn: {
     type: Date,
