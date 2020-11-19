@@ -1,11 +1,18 @@
 const Internship = require("../models/Internships");
+const mongoose = require("mongoose");
 
-function InternshipService() {
-    async function getInternships() {
+class InternshipService {
+    async getInternships() {
       return Internship.find({});
     }
 
-    return {getInternships};
+    async createInternship(internshipData) {
+     internshipData.Company = mongoose.Schema.Types.ObjectId(internshipData.Company);
+      const internship = new Internship(internshipData);
+      await internship.save();
+      return internship;
+    }
+
 }
 
-module.exports = InternshipService;
+module.exports = new InternshipService();
