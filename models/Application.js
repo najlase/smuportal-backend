@@ -38,7 +38,7 @@ InternshipID: {
   Status: {
     type: String,
     required: true,
-    wercase: true,
+    lowercase: true,
     min: 2,
     max: 255
   },
