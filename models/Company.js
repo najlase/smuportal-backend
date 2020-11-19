@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const studentsSchema = new Schema({
+const companySchema = new Schema({
   Name: {
     type: String,
     required: true,
@@ -20,4 +20,4 @@ const studentsSchema = new Schema({
   }
 });
 
-export default model("Companies", CompaniesSchema);
+export default model("Company", CompanySchema);
