@@ -8,17 +8,16 @@ const studentsSchema = new Schema({
     min: 2,
     max: 255
   },
-  InternshipID: {
-    type: Number,
-    unique: true,
+  Description: {
+    type: String,
     required: true,
-    min: 1000000000,
-    max: 9999999999999,
-    validate: {
-      validator: Number.isInteger,
-      message: "{VALUE} is not an integer value"
-    }
+    min: 2,
+    max: 255
   },
+  Logo: {
+    type: String,
+    required: true
+  }
 });
 
 export default model("Companies", CompaniesSchema);

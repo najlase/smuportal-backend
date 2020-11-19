@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const IntershipsSchema = new mongoose.Schema({
+const IntershipSchema = new mongoose.Schema({
   Domain: {
     type: String,
     required: true,
@@ -8,10 +8,16 @@ const IntershipsSchema = new mongoose.Schema({
     min: 2,
     max: 255
   },
-  Star: {
-    type: Boolean,
+ Company: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Companies',
+    required: false,
+    },
+  Description: {
+    type: String,
     required: true,
-    lowercase: true,
+    min: 2,
+    max: 255  
   },
   Location: {
     type: String,
@@ -30,22 +36,8 @@ const IntershipsSchema = new mongoose.Schema({
   Deadline: {
     type: Date,
     required: true,
-    lowercase: true,
-    min: 2,
-    max: 255
-  },
-  ID: {
-    type: Number,
-    unique: true,
-    required: true,
-    min: 1000000000,
-    max: 9999999999999,
-    validate: {
-      validator: Number.isInteger,
-      message: "{VALUE} is not an integer value"
-    }
   },
 
 });
 
-module.exports = mongoose.model("Internships", internshipSchema);
+module.exports = mongoose.model("Internships", IntershipSchema);
