@@ -1,7 +1,6 @@
 const Router = require("express").Router;
-const InternshipService = require("../../services/internship.service");
+const internshipService = require("../../services/internship.service");
 
-const internshipService = InternshipService();
 // const { verifyToken } = require("../../helpers/verifyToken");
 
 const router = Router({
@@ -9,8 +8,24 @@ const router = Router({
 });
 
 router.get("/internships", async (req, res) => {
-  const internships = await internshipService.getInternships();
-  res.send(internships);
+  try {
+    const internships = await internshipService.getInternships();
+    res.send(internships);
+  }
+  catch (e) {
+    res.json({ success: false, msg: "Failed to get internships"});
+  }
+});
+
+router.post("/internships", async (req, res) => {
+  try {
+    const { Domain, Company, Description, Location, Duration, Deadline } = req.body;
+    const internship = await internshipService.createInternship({ Domain, Company, Description, Location, Duration, Deadline });
+    res.send(internship);
+  }
+  catch (e) {
+    res.json({ success: false, msg: e.message});
+  }
 });
 
 module.exports = router;
