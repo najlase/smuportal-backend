@@ -7,10 +7,7 @@ Files: {
   },
 AppliedOn: {
     type: Date,
-    required: true,
-    lowercase: true,
-    min: 2,
-    max: 255
+    default:Date.now
   },
 StdID: {
     type: Number,
