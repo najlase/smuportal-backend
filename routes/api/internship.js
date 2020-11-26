@@ -39,4 +39,14 @@ router.patch("/internships/:id/", async (req, res) => {
   }
 });
 
+router.delete("/internships/:id/", async (req, res) => {
+  try {
+    await internshipService.deleteInternship(req.params.id);
+    res.send({});
+  }
+  catch (e) {
+    res.json({ success: false, msg: "Failed to get internships"});
+  }
+});
+
 module.exports = router;
