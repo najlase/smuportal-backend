@@ -28,4 +28,15 @@ router.post("/internships", async (req, res) => {
   }
 });
 
+router.patch("/internships/:id/", async (req, res) => {
+  try {
+    const { Domain, Company, Description, Location, Duration, Deadline } = req.body;
+    const internship = await internshipService.updateInternship(req.params.id, { Domain, Company, Description, Location, Duration, Deadline });
+    res.send(internship);
+  }
+  catch (e) {
+    res.json({ success: false, msg: e.message});
+  }
+});
+
 module.exports = router;
