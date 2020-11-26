@@ -19,8 +19,7 @@ router.get("/internships", async (req, res) => {
 
 router.post("/internships", async (req, res) => {
   try {
-    const { Domain, Company, Description, Location, Duration, Deadline } = req.body;
-    const internship = await internshipService.createInternship({ Domain, Company, Description, Location, Duration, Deadline });
+    const internship = await internshipService.createInternship(req.body);
     res.send(internship);
   }
   catch (e) {
@@ -30,8 +29,7 @@ router.post("/internships", async (req, res) => {
 
 router.patch("/internships/:id/", async (req, res) => {
   try {
-    const { Domain, Company, Description, Location, Duration, Deadline } = req.body;
-    const internship = await internshipService.updateInternship(req.params.id, { Domain, Company, Description, Location, Duration, Deadline });
+    const internship = await internshipService.updateInternship(req.params.id, req.body);
     res.send(internship);
   }
   catch (e) {
