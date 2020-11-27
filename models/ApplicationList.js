@@ -7,11 +7,6 @@ const ApplicationListSchema = new mongoose.Schema({
           ref: "MyApplication"
         }
     ],
-    //Files
-    Files:{
-        type:String,
-        data:Buffer
-    },
     //Validation
     Valid:{
         type: String,
