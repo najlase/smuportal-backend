@@ -1,5 +1,6 @@
 const Router = require("express").Router;
-const applicationService = require("../../services/application.service");
+const myApplicationService = require("../../services/myApplication.service");
+const applicationListService = require("../../services/ApplicationList.service");
 
 // const { verifyToken } = require("../../helpers/verifyToken");
 
@@ -7,7 +8,7 @@ const router = Router({
   mergeParams: true
 });
 
-router.get("/application", async (req, res) => {
+router.get("/applicationList", async (req, res) => {
   try {
     const application = await applicationService.getApplication();
     res.send(internships);
@@ -17,10 +18,10 @@ router.get("/application", async (req, res) => {
   }
 });
 
-router.post("/application", async (req, res) => {
+router.post("/myApplication", async (req, res) => {
   try {
-    const { StdID, InternshipID, AppliedOn } = req.body;
-    const application = await application.newApplication({ StdID, InternshipID, AppliedOn  });
+    const { StdID, InternshipID, Files } = req.body;
+    const application = await application.newApplication({ StdID, InternshipID, Files  });
     res.send(application);
   }
   catch (e) {
