@@ -14,6 +14,7 @@ router.post("/register", async (req, res, next) => {
   try {
     // Check form against registration requirements
     registerValidation(req.body);
+    const rolename = req.body.role;
     const roleId = await roleService.getRoleIdByRoleName("student");
     const user = await userService.register(req.body, roleId);
 
