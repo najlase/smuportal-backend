@@ -9,20 +9,18 @@ class InternshipService {
   async createInternship(internshipData) {
     internshipData.Company = mongoose.Schema.Types.ObjectId(internshipData.Company);
     const internship = new Internship(internshipData);
-    await internship.save();
-    return internship;
+    return internship.save();
   }
 
   async updateInternship(id, internshipData) {
     if (internshipData.Company)
       internshipData.Company = mongoose.Schema.Types.ObjectId(internshipData.Company);
 
-    let internship = await Internship.update({ _id: id }, internshipData, { multi: true });
-    return internship;
+    return Internship.update({ _id: id }, internshipData, { multi: true });
   }
 
   async deleteInternship(id) {
-    await Internship.deleteOne({ _id: id });
+    return Internship.deleteOne({ _id: id });
   }
 }
 
