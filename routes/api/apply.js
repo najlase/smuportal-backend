@@ -1,6 +1,6 @@
 const Router = require("express").Router;
 const myApplicationService = require("../../services/myApplication.service");
-const applicationListService = require("../../services/ApplicationList.service");
+const ApplicationListService = require("../../services/ApplicationList.service");
 
 // const { verifyToken } = require("../../helpers/verifyToken");
 
@@ -10,8 +10,8 @@ const router = Router({
 
 router.get("/applicationList", async (req, res) => {
   try {
-    const application = await applicationService.getApplication();
-    res.send(internships);
+    const applicationList = await ApplicationListService.getApplication();
+    res.send(applicationList);
   }
   catch (e) {
     res.json({ success: false, msg: "Failed to get application"});
@@ -21,8 +21,8 @@ router.get("/applicationList", async (req, res) => {
 router.post("/myApplication", async (req, res) => {
   try {
     const { StdID, InternshipID, Files } = req.body;
-    const application = await application.newApplication({ StdID, InternshipID, Files  });
-    res.send(application);
+    const myApplication = await myApplicationService.newApplication({ StdID, InternshipID, Files  });
+    res.send(myApplication);
   }
   catch (e) {
     res.json({ success: false, msg: e.message});
