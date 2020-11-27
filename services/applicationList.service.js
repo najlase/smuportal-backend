@@ -1,6 +1,6 @@
 const ApplicationList = require("../models/ApplicationList");
 
-function ApplicationService() {
+function ApplicationListService() {
     async function getApplicationById(id) {
     return Application.findById(id);
     }
