@@ -1,6 +1,6 @@
-const myApplication = require("../models/myApplication");
+const myApplication = require("../models/MyApplication");
 
-function ApplicationService() {
+function myApplicationService() {
     //async function getApplication() {
     //  return Application.find({})
     //}
