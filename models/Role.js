@@ -17,7 +17,7 @@ const roleSchema = new mongoose.Schema({
   name: {
     type: String,
     lowercase: true,
-    enum: ["student", "professor"],
+    enum: ["student", "professor", "cc"],
     default: "student"
   }
 });
