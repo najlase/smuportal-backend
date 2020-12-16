@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ApplicationListSchema = new mongoose.Schema({
-    _ApllicationId: [
+    _ApplicationId: [
         {
           type: mongoose.Schema.Types.ObjectId,
           required: true,

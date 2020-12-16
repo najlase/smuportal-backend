@@ -1,6 +1,6 @@
 const Router = require("express").Router;
 const myApplicationService = require("../../services/myApplication.service");
-const ApplicationListService = require("../../services/ApplicationList.service");
+const ApplicationListService = require("../../services/ApplicationList.service")();
 
 // const { verifyToken } = require("../../helpers/verifyToken");
 
@@ -14,6 +14,7 @@ router.get("/applicationList", async (req, res) => {
     res.send(applicationList);
   }
   catch (e) {
+    console.log(e);
     res.json({ success: false, msg: "Failed to get application"});
   }
 });

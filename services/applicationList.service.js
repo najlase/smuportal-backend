@@ -1,13 +1,14 @@
 const ApplicationList = require("../models/ApplicationList");
+const mongoose = require("mongoose");
 
 function ApplicationListService() {
     async function getApplication() {
-    return Application.find();
+    return ApplicationList.find();
     }
   
-  
+
     return {
-      getApplication,
+      getApplication
     }
   }
   module.exports = ApplicationListService;
