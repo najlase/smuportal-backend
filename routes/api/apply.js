@@ -1,6 +1,6 @@
 const Router = require("express").Router;
 const myApplicationService = require("../../services/myApplication.service");
-const ApplicationListService = require("../../services/ApplicationList.service")();
+const ApplicationListService = require("../../services/applicationList.service")();
 
 // const { verifyToken } = require("../../helpers/verifyToken");
 
