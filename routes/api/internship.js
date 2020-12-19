@@ -13,6 +13,7 @@ router.get("/internships", async (req, res) => {
     res.send(internships);
   }
   catch (e) {
+    console.log(e);
     res.json({ success: false, msg: "Failed to get internships"});
   }
 });

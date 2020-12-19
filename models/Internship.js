@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 
 const IntershipSchema = new mongoose.Schema({
+  Title: {
+    type: String,
+    required: true,
+    lowercase: true,
+    min: 2,
+    max: 255
+  },
   Domain: {
     type: String,
     required: true,
@@ -10,8 +17,8 @@ const IntershipSchema = new mongoose.Schema({
   },
  Company: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company',
-    required: false,
+    ref: 'Companies',
+    required: true,
     },
   Description: {
     type: String,
@@ -40,4 +47,4 @@ const IntershipSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Internship", IntershipSchema);
+module.exports = mongoose.model("Internships", IntershipSchema);

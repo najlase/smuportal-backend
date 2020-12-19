@@ -1,9 +1,10 @@
 const Internship = require("../models/Internship");
 const mongoose = require("mongoose");
+const Company = require("../models/Company")
 
 class InternshipService {
   async getInternships() {
-    return Internship.find({});
+    return Internship.find({}).populate({ path: 'Company', model: Company });
   }
 
   async createInternship(internshipData) {
