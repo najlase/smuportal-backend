@@ -1,6 +1,6 @@
 const Router = require("express").Router;
-const myApplicationService = require("../../services/myApplication.service");
-const ApplicationListService = require("../../services/ApplicationList.service")();
+const ApplicationService = require("../../services/myApplication.service");
+
 
 // const { verifyToken } = require("../../helpers/verifyToken");
 
@@ -8,9 +8,11 @@ const router = Router({
   mergeParams: true
 });
 
+
+
 router.get("/applicationList", async (req, res) => {
   try {
-    const applicationList = await ApplicationListService.getApplication();
+    const applicationList = await ApplicationService.getApplication();
     res.send(applicationList);
   }
   catch (e) {
@@ -19,14 +21,49 @@ router.get("/applicationList", async (req, res) => {
   }
 });
 
-router.post("/myApplication", async (req, res) => {
+router.get("/applicationList/:status", async (req, res) => {
   try {
-    const { StdID, InternshipID, Files } = req.body;
-    const myApplication = await myApplicationService.newApplication({ StdID, InternshipID, Files  });
+    const applicationList = await ApplicationService.getApplicationByStatus(req.params.status);
+    res.send(applicationList);
+  }
+  catch (e) {
+    console.log(e);
+    res.json({ success: false, msg: "Failed to get application by status"});
+  }
+});
+
+
+router.post("/myApplication", verifyToken, async (req, res) => {
+  try {
+    let UserID=req.decodedToken._id;
+    const {InternshipID, Files} = req.body;
+    const myApplication = await ApplicationService.addApplication(UserID,{ InternshipID, Files});
     res.send(myApplication);
   }
   catch (e) {
-    res.json({ success: false, msg: e.message});
+    res.json({ success: false, msg: "Cannot add this application"});
+  }
+});
+
+
+router.patch("/applicationList/:id/", async (req, res) => {
+  try {
+    const appList = await ApplicationService.updateApplicationStatus(req.params.id, req.params.status);
+    res.send(appList);
+  }
+  catch (e) {
+    res.json({ success: false, msg: "Cannot update the status"});
+  }
+});
+
+
+router.delete("/applicationList/:id/", async (req, res) => {
+  try {
+    await ApplicationService.deleteApplication(req.params.id);
+    res.send({succes:true});
+  }
+  catch (e) {
+    res.json({ success: false, msg: "Failed to delete application"});
   }
 });
 
