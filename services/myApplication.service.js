@@ -1,17 +1,45 @@
 const myApplication = require("../models/MyApplication");
 
+
 function myApplicationService() {
     //async function getApplication() {
     //  return Application.find({})
     //}
-  
-    async function newApplication(student, internship, file) {
-      return Application.create({StdID: student, InternshipID: internship , Files: file })
+
+    async function addApplication(userID, internshipID, files) {
+      let application = new myApplication({
+        userID, 
+        internshipID, 
+        files, 
+      });
+      return application.save();
     }
+
+    async function updateApplicationStatus(id,status){
+      return myApplication.findByIdAndUpdate(id, {Status:status});
+    }
+    
+    async function getApplication() {
+      return myApplication.find();
+    }
+
+    async function getApplicationByStatus(status){
+      const query = { Status: status };
+      return myApplication.find(query);
+    }
+    
+    async function deleteApplication(id) {
+      return myApplication.deleteOne({ _id: id });
+    }
+     
+    
   
     return {
-      //getApplication,
-      newApplication,
+      getApplication,
+      addApplication,
+      getApplicationByStatus,
+      updateApplicationStatus,
+      deleteApplication
     }
   }
   module.exports = myApplicationService;
