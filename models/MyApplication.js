@@ -9,7 +9,7 @@ UserID: {
 InternshipID: {
   type: mongoose.Schema.Types.ObjectId,
   required: true,
-  ref: "Internship"
+  ref: "Internships"
 },
 Files: {
     type: String,

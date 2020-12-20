@@ -29,6 +29,26 @@ router.get("/internships/all", async (req, res) => {
   }
 });
 
+router.post("/internships/filter", async (req, res) => {
+  try {
+    const internship = await internshipService.filterInternships(req.body);
+    res.send(internship);
+  }
+  catch (e) {
+    res.json({ error: e.message});
+  }
+});
+
+router.post("/internships/filterAll", async (req, res) => {
+  try {
+    const internship = await internshipService.filterAllInternships(req.body);
+    res.send(internship);
+  }
+  catch (e) {
+    res.json({ error: e.message});
+  }
+});
+
 router.post("/internships", async (req, res) => {
   try {
     const internship = await internshipService.createInternship(req.body);

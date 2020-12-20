@@ -33,11 +33,10 @@ router.get("/applicationList/:status", async (req, res) => {
 });
 
 
-router.post("/myApplication", verifyToken, async (req, res) => {
+router.post("/myApplication", async (req, res) => {
   try {
-    let UserID=req.decodedToken._id;
-    const {InternshipID, Files, AppliedOn, Valid, tatus } = req.body;
-    const myApplication = await ApplicationService.addApplication(UserID,{ InternshipID, Files, AppliedOn });
+    let internshipData = req.body;
+    const myApplication = await ApplicationService.addApplication(internshipData);
     res.send(myApplication);
   }
   catch (e) {
@@ -48,7 +47,7 @@ router.post("/myApplication", verifyToken, async (req, res) => {
 
 router.patch("/applicationList/:id/", async (req, res) => {
   try {
-    const appList = await ApplicationService.updateApplicationStatus(req.params.id, req.params.status);
+    const appList = await ApplicationService.updateApplicationStatus(req.params.id, req.body.status);
     res.send(appList);
   }
   catch (e) {

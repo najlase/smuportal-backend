@@ -38,6 +38,10 @@ const IntershipSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  StartingDate: {
+    type: Date,
+    required: true,
+  },
   IsArchived: {
     type: Boolean,
     required: true,

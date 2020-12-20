@@ -6,12 +6,8 @@ function myApplicationService() {
     //  return Application.find({})
     //}
 
-    async function addApplication(userID, internshipID, files) {
-      let application = new myApplication({
-        userID, 
-        internshipID, 
-        files, 
-      });
+    async function addApplication(internshipData) {
+      let application = new myApplication(internshipData);
       return application.save();
     }
 
