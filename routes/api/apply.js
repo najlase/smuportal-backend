@@ -16,7 +16,16 @@ router.get("/applicationList", async (req, res) => {
     res.send(applicationList);
   }
   catch (e) {
-    console.log(e);
+    res.json({ success: false, msg: "Failed to get application"});
+  }
+});
+
+router.get("/applicationList/user/:userId", async (req, res) => {
+  try {
+    const applicationList = await ApplicationService.getApplicationByUserId(req.params.userId);
+    res.send(applicationList);
+  }
+  catch (e) {
     res.json({ success: false, msg: "Failed to get application"});
   }
 });
@@ -36,10 +45,12 @@ router.get("/applicationList/:status", async (req, res) => {
 router.post("/myApplication", async (req, res) => {
   try {
     let internshipData = req.body;
+    internshipData.UserID = "5fdf84440e18dc2b67e1459d"; // a constant value for testing
     const myApplication = await ApplicationService.addApplication(internshipData);
     res.send(myApplication);
   }
   catch (e) {
+    console.log(e);
     res.json({ success: false, msg: "Cannot add this application"});
   }
 });

@@ -1,5 +1,5 @@
 const myApplication = require("../models/MyApplication");
-
+const mongoose = require("mongoose");
 
 function myApplicationService() {
     //async function getApplication() {
@@ -7,6 +7,9 @@ function myApplicationService() {
     //}
 
     async function addApplication(internshipData) {
+      internshipData.UserID = mongoose.Types.ObjectId(internshipData.UserID);
+      internshipData.InternshipID = mongoose.Types.ObjectId(internshipData.InternshipID);
+      console.log(internshipData);
       let application = new myApplication(internshipData);
       return application.save();
     }
@@ -17,6 +20,11 @@ function myApplicationService() {
     
     async function getApplication() {
       return myApplication.find();
+    }
+
+    async function getApplicationByUserId(userId){
+      const query = { UserID: userId };
+      return myApplication.find(query);
     }
 
     async function getApplicationByStatus(status){
@@ -35,7 +43,8 @@ function myApplicationService() {
       addApplication,
       getApplicationByStatus,
       updateApplicationStatus,
-      deleteApplication
+      deleteApplication,
+      getApplicationByUserId
     }
   }
-  module.exports = myApplicationService;
+  module.exports = myApplicationService();

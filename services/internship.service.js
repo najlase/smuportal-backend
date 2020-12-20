@@ -1,6 +1,7 @@
 const Internship = require("../models/Internship");
 const mongoose = require("mongoose");
-const Company = require("../models/Company")
+const Company = require("../models/Company");
+const User = require("../models/User");
 
 class InternshipService {
   async getInternships() {
@@ -29,8 +30,14 @@ class InternshipService {
     if(filterData.StartingDate)
       validFilters.StartingDate = {"$lte": new Date(filterData.StartingDate)};
 
-    if(filterData.Duration)
-      validFilters.Duration = filterData.Duration;
+    if(filterData.Duration){
+      if(filterData.Duration == "1 Month or less")
+        validFilters.Duration = {"$lte": "1 Month"};
+      else if(filterData.Duration == "Between 1 and 3 months")
+        validFilters.Duration = {"$gt": "1 Month", "$lte": "3 Months"};
+      else if(filterData.Duration == "More than 3 months")
+        validFilters.Duration = {"$gt": "3 Months"};
+    }
 
     return Internship.find(validFilters).populate({ path: 'Company', model: Company });
   }
@@ -57,8 +64,14 @@ class InternshipService {
     if(filterData.StartingDate)
       validFilters.StartingDate = {"$lte": new Date(filterData.StartingDate)};
 
-    if(filterData.Duration)
-      validFilters.Duration = filterData.Duration;
+    if(filterData.Duration){
+      if(filterData.Duration == "1 Month or less")
+        validFilters.Duration = {"$lte": "1 Month"};
+      else if(filterData.Duration == "Between 1 and 3 months")
+        validFilters.Duration = {"$gte": "1 Month", "$lte": "3 Months"};
+      else if(filterData.Duration == "More than 3 months")
+        validFilters.Duration = {"$gte": "3 Months"};
+    }
 
     return Internship.find(validFilters).populate({ path: 'Company', model: Company });
   }
@@ -84,6 +97,27 @@ class InternshipService {
 
   async restoreInternship(id) {
     return Internship.update({ _id: id }, {IsArchived: false}, { multi: true });
+  }
+
+  async starInternship(userId, internshipId) {
+    let user = await User.findOne({_id: userId});
+    if(!user.starredInternships)
+      user.starredInternships = [internshipId];
+    else {
+      let i = user.starredInternships.indexOf(internshipId);
+      if(i != -1)
+        user.starredInternships.splice(i,1);
+      else
+        user.starredInternships.push(internshipId);
+    }
+    return user.save();
+  }
+
+  async getStarredInternships(userId) {
+    let user = await User.findOne({_id: userId});
+    if(user.starredInternships)
+      return user.starredInternships;
+    return [];
   }
 
   async deleteInternship(id) {

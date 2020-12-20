@@ -85,7 +85,11 @@ const userSchema = new mongoose.Schema({
   _roleId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Role"
-  }
+  },
+  starredInternships: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Internships"
+  }]
 });
 
 module.exports = mongoose.model("User", userSchema);

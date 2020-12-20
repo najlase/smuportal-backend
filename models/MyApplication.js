@@ -4,6 +4,7 @@ const MyApplicationSchema = new mongoose.Schema({
 UserID: {
   type: mongoose.Schema.Types.ObjectId,
   required: true,
+  unique:false,
   ref: "User"
 },
 InternshipID: {
