@@ -4,16 +4,14 @@ const IntershipSchema = new mongoose.Schema({
   Title: {
     type: String,
     required: true,
-    lowercase: true,
     min: 2,
-    max: 255
+    max: 100
   },
   Domain: {
     type: String,
     required: true,
-    lowercase: true,
     min: 2,
-    max: 255
+    max: 50
   },
  Company: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,22 +27,22 @@ const IntershipSchema = new mongoose.Schema({
   Location: {
     type: String,
     required: true,
-    lowercase: true,
     min: 2,
-    max: 255
+    max: 50
   },
   Duration: {
     type: String,
     required: true,
-    lowercase: true,
-    min: 2,
-    max: 255
   },
   Deadline: {
     type: Date,
     required: true,
   },
-
+  IsArchived: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 });
 
 module.exports = mongoose.model("Internships", IntershipSchema);
