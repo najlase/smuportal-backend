@@ -1,41 +1,15 @@
 const mongoose = require("mongoose");
 
 const MyApplicationSchema = new mongoose.Schema({
-firstName: {
-  type: String,
+UserID: {
+  type: mongoose.Schema.Types.ObjectId,
   required: true,
-  lowercase: true,
-  min: 2,
-  max: 255
-},
-lastName: {
-  type: String,
-  required: true,
-  lowercase: true,
-  min: 2,
-  max: 255
-},
-universityID: {
-  type: Number,
-  unique: true,
-  required: true,
-  min: 1000000,
-  max: 9999999,
-  validate: {
-    validator: Number.isInteger,
-    message: "{VALUE} is not an integer value"
-  }
+  ref: "User"
 },
 InternshipID: {
-  type: Number,
-  unique: true,
+  type: mongoose.Schema.Types.ObjectId,
   required: true,
-  min: 1000000000,
-  max: 9999999999999,
-  validate: {
-    validator: Number.isInteger,
-    message: "{VALUE} is not an integer value"
-  }
+  ref: "Internship"
 },
 Files: {
     type: String,
@@ -45,6 +19,18 @@ AppliedOn: {
     type: Date,
     default:Date.now
   },
+Valid:{
+    type: String,
+    lowercase: true,
+    enum: ["valid", "invalid","none"],
+    default: "none"
+},
+Status:{
+    type: String,
+    lowercase: true,
+    enum: ["pending", "submitted to company", "received by company"],
+    default: "pending"
+}
 });
 
 module.exports = mongoose.model("MyApplication", MyApplicationSchema);
