@@ -36,8 +36,8 @@ router.get("/applicationList/:status", async (req, res) => {
 router.post("/myApplication", verifyToken, async (req, res) => {
   try {
     let UserID=req.decodedToken._id;
-    const {InternshipID, Files} = req.body;
-    const myApplication = await ApplicationService.addApplication(UserID,{ InternshipID, Files});
+    const {InternshipID, Files, AppliedOn, Valid, tatus } = req.body;
+    const myApplication = await ApplicationService.addApplication(UserID,{ InternshipID, Files, AppliedOn });
     res.send(myApplication);
   }
   catch (e) {
