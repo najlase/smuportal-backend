@@ -47,6 +47,11 @@ const IntershipSchema = new mongoose.Schema({
     required: true,
     default: false
   },
+  CreatedAt: {
+    type: Date,
+    required: true,
+    default: Date.now
+  },
 });
 
 module.exports = mongoose.model("Internships", IntershipSchema);

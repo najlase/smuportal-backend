@@ -5,11 +5,11 @@ const User = require("../models/User");
 
 class InternshipService {
   async getInternships() {
-    return Internship.find({IsArchived: false}).populate({ path: 'Company', model: Company });
+    return Internship.find({IsArchived: false}).sort({ $natural: -1 }).populate({ path: 'Company', model: Company });
   }
 
   async getAllInternships() {
-    return Internship.find().populate({ path: 'Company', model: Company });
+    return Internship.find().sort({ $natural: -1 }).populate({ path: 'Company', model: Company });
   }
 
   async filterInternships(filterData) {
