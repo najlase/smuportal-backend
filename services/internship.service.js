@@ -39,7 +39,7 @@ class InternshipService {
         validFilters.Duration = {"$gt": "3 Months"};
     }
 
-    return Internship.find(validFilters).populate({ path: 'Company', model: Company });
+    return Internship.find(validFilters).sort({ $natural: -1 }).populate({ path: 'Company', model: Company });
   }
 
 
@@ -73,7 +73,7 @@ class InternshipService {
         validFilters.Duration = {"$gte": "3 Months"};
     }
 
-    return Internship.find(validFilters).populate({ path: 'Company', model: Company });
+    return Internship.find(validFilters).sort({ $natural: -1 }).populate({ path: 'Company', model: Company });
   }
 
   async createInternship(internshipData) {
